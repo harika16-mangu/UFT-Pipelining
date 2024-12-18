@@ -1,0 +1,12 @@
+﻿<Properties>
+  <WatchEntry0 value="strBrowser" />
+  <WatchEntry1 value="strInvolvedPCORI" />
+  <WatchEntry2 value="Brwser.WebList(oDesc)" />
+  <WatchEntry3 value="strBPStudies(i)" />
+  <WatchEntry4 value="dtmCurrentDate" />
+  <WatchEntry5 value="strScriptName" />
+  <WatchEntry6 value="strFName" />
+  <WatchEntry7 value="strFilePath" />
+  <WatchEntry8 value="strFName" />
+  <WatchEntry9 value="strFName" />
+</Properties>

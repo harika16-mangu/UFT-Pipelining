@@ -1,0 +1,425 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE Report
+[
+<!ELEMENT Report (General ,(Doc|BPT)) >
+<!ATTLIST Report ver CDATA #REQUIRED tmZone CDATA #REQUIRED>
+
+<!ELEMENT General ( DocLocation ) >
+<!ATTLIST General productName CDATA #REQUIRED productVer CDATA #REQUIRED os CDATA #REQUIRED host CDATA #REQUIRED qcserver CDATA #IMPLIED qcproject CDATA #IMPLIED SolManSolutionId CDATA #IMPLIED SolManProjectId CDATA #IMPLIED SolManTestPlanId CDATA #IMPLIED SolManTestPackageId CDATA #IMPLIED SolManUserInfoData CDATA #IMPLIED  >
+
+<!ELEMENT BPT (DName,Res,DVer?,TSet?,TInst?,NodeArgs,AdditionalInfo*,Doc*) >
+<!ATTLIST BPT rID ID #REQUIRED >
+
+<!ELEMENT Doc (DName,ConfName?,Res,DVer?,TSet?,TInst?,RunType?,DT?,AdditionalInfo*,Step*,DIter*,Step*,Action*,Doc*,Summary?,TestMaintenanceSummary*,NodeArgs?) >
+<!ATTLIST Doc rID ID #REQUIRED type (Test|BC|BPTWrapperTest|Flow|Group|Action) "Test" productName CDATA #REQUIRED BCIter CDATA #IMPLIED >
+
+<!ELEMENT RunType ( #PCDATA )>
+<!ATTLIST RunType fmStep (False|True) "False" batch (False|True) "False" upDesc (False|True) "False" upChk (False|True) "False" upAS (False|True) "False">
+
+<!ELEMENT DName ( #PCDATA ) >
+
+<!ELEMENT ConfName ( #PCDATA ) >
+
+<!ELEMENT Res ( #PCDATA ) >
+
+<!ELEMENT AdditionalInfo (AdditionalDataName,AdditionalDataValue ) >
+
+<!ELEMENT AdditionalDataName ( #PCDATA ) >
+
+<!ELEMENT AdditionalDataValue ( #PCDATA ) >
+
+<!ELEMENT DVer ( #PCDATA ) >
+
+<!ELEMENT TSet ( #PCDATA ) >
+
+<!ELEMENT TInst ( #PCDATA ) >
+
+<!ELEMENT DIter (Step*,Action+,Summary?,NodeArgs)>
+<!ATTLIST DIter rID ID #REQUIRED iterID CDATA #REQUIRED>
+
+<!ELEMENT DocLocation ( #PCDATA )>
+
+<!ELEMENT Action (AName,AIter*,(Step|HtmlStep|Action)*, Summary,ActionMaintenanceSummary*, NodeArgs ) >
+<!ATTLIST Action rID ID #REQUIRED>
+
+<!ELEMENT AIter ((Step|HtmlStep|Action)*,DataMapping?, Summary?,NodeArgs) >
+<!ATTLIST AIter rID ID #REQUIRED iterID CDATA #REQUIRED isCountable (False|True) "False" >
+
+<!ELEMENT AName ( #PCDATA ) >
+
+<!ELEMENT TestMaintenanceSummary (ActionMaintenanceSummary*) >
+<!ATTLIST TestMaintenanceSummary ObjectsAdded CDATA #REQUIRED ObjectsUpdated CDATA #REQUIRED StepsUpdated CDATA #REQUIRED StepsComments CDATA #REQUIRED><!ELEMENT ActionMaintenanceSummary (ObjectChange* ) >
+<!ATTLIST ActionMaintenanceSummary Action CDATA #REQUIRED Objects CDATA #REQUIRED Updated CDATA #REQUIRED LinesTotal CDATA #REQUIRED Added CDATA #REQUIRED LinesUpdated CDATA #REQUIRED>
+
+<!ELEMENT ObjectChange  (Hierarchy, PropertyChangeList* ) >
+<!ATTLIST ObjectChange Operation CDATA #IMPLIED OriginalRepository CDATA #IMPLIED>
+
+<!ELEMENT PropertyChangeList (PropertyDef*) >
+
+<!ELEMENT PropertyDef (OriginalValue, NewValue) >
+<!ATTLIST PropertyDef PropName CDATA #REQUIRED OriginRegularExpression (True|False) "False" NewRegularExpression (True|False) "False" AddedProperty (True|False) "False" >
+
+<!ELEMENT OriginalValue ( #PCDATA )>
+
+<!ELEMENT NewValue ( #PCDATA )>
+
+<!ELEMENT Hierarchy  (ObjectName, Hierarchy*) >
+<!ATTLIST Hierarchy MicClass CDATA #REQUIRED>
+
+<!ELEMENT ObjectName  ( #PCDATA ) >
+
+<!ELEMENT Step (Obj,Details,Time,TimeTick* ,(Step|HtmlStep|Doc)*, DataMapping?, NodeArgs) >
+<!ATTLIST Step rID ID #REQUIRED retval CDATA #IMPLIED>
+
+<!ELEMENT HtmlStep (HTML,TimeTick*,(Step|HtmlStep|Doc)*,NodeArgs) >
+<!ATTLIST HtmlStep rID ID #REQUIRED >
+
+<!ELEMENT Obj ( #PCDATA ) >
+<!ATTLIST Obj plainTxt (False|True) "True">
+
+<!ELEMENT Details ( #PCDATA ) >
+<!ATTLIST Details plainTxt (False|True) "True">
+
+<!ELEMENT Time ( #PCDATA ) >
+
+<!ELEMENT HTML ( #PCDATA ) >
+
+<!ELEMENT Disp ( #PCDATA ) >
+
+<!ELEMENT TimeTick ( #PCDATA ) >
+
+<!ELEMENT DataMapping ( DataMappedItem* )>
+<!ELEMENT DataMappedItem EMPTY >
+<!ATTLIST DataMappedItem dsName CDATA #REQUIRED >
+<!ATTLIST DataMappedItem rowId CDATA #REQUIRED >
+
+<!ELEMENT NodeArgs (Disp,TopPane?,BtmPane?,ExtendedInfo? )>
+<!ATTLIST NodeArgs eType CDATA #REQUIRED icon CDATA #REQUIRED nRep CDATA #REQUIRED UserNote CDATA #IMPLIED filter (False|True) "True">
+<!ATTLIST NodeArgs status (Passed|Failed|Done|Warning|Information) "Done">
+<!ATTLIST NodeArgs iconSel CDATA #IMPLIED nType CDATA #IMPLIED MovieMarker CDATA "">
+<!ATTLIST NodeArgs Source CDATA #IMPLIED SourceLine CDATA #IMPLIED StepFlowItemKey CDATA #IMPLIED >
+
+<!ELEMENT TopPane (Path)>
+
+<!ELEMENT BtmPane ( (Path|WR)?,ASHilite?)>
+<!ATTLIST BtmPane vType CDATA "HTML">
+
+<!ELEMENT Path ( #PCDATA ) >
+
+<!ELEMENT ASHilite ( #PCDATA ) >
+
+<!ELEMENT WR ( #PCDATA ) >
+
+<!ELEMENT ExtendedInfo ( StepData ) >
+
+<!ATTLIST ExtendedInfo StepType CDATA #REQUIRED>
+<!ELEMENT DT (NodeArgs) >
+<!ATTLIST DT rID ID #REQUIRED>
+
+<!ELEMENT Summary (Param*)>
+<!ATTLIST Summary sTime CDATA #IMPLIED eTime CDATA #IMPLIED passed CDATA #IMPLIED failed CDATA #IMPLIED warnings CDATA #IMPLIED retval CDATA #IMPLIED stopped (False|True) "False" >
+
+<!ELEMENT Param (ParamName,ParamVal)+ >
+<!ATTLIST Param paramInOut (In|Out) "In">
+
+<!ELEMENT ParamName ( #PCDATA ) >
+
+<!ELEMENT ParamVal ( #PCDATA ) >
+
+]
+>
+<Report ver="2.0" tmZone="Coordinated Universal Time">
+<General productName="OpenText Functional Testing" productVer="24.4" os="Windows Server 2022" host="PooledVDI-0"><DocLocation><![CDATA[C:\Users\SatheeshKumarDuraisa\OneDrive - Patient-Centered Outcomes Research Institute\SFAutomation\Scripts\LOI_Submission_RA_LOI_And_Application_001_02]]></DocLocation></General>
+<Doc rID="T1"   productName= "OpenText Functional Testing"  >
+<DName><![CDATA[LOI_Submission_RA_LOI_And_Application_001_02]]></DName>
+<Res><![CDATA[Res1]]></Res>
+<DT rID="T2">
+<NodeArgs eType="Table" icon="2" nRep="4" filter="False" >
+<Disp><![CDATA[Run-Time Data Table]]></Disp>
+<BtmPane vType="Table" >
+<Path><![CDATA[Default.xlsx]]></Path>
+</BtmPane>
+</NodeArgs>
+</DT>
+<DIter rID="T3" iterID="1" >
+<Action rID="T4">
+<AName><![CDATA[Action1]]></AName>
+<Step rID="T5">
+<Obj plainTxt="False" ><![CDATA[SystemUtil]]></Obj>
+<Details plainTxt="False" ><![CDATA[SystemUtil]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:49]]></Time>
+<TimeTick>1732715989</TimeTick>
+<Step rID="T6">
+<Obj plainTxt="False" ><![CDATA[Run "chrome.exe",3]]></Obj>
+<Details plainTxt="False" ><![CDATA[Run "chrome.exe",3]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:49]]></Time>
+<TimeTick>1732715989</TimeTick>
+<NodeArgs eType="Replay" icon="5" nRep="11" status="Passed" >
+<Disp><![CDATA[Run "chrome.exe",3]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Replay" icon="5" nRep="10" status="Passed" >
+<Disp><![CDATA[SystemUtil]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T7">
+<Obj ><![CDATA[Opening Pcori ApplicationSuccess]]></Obj>
+<Details ><![CDATA[Opening the Pcori Application-Was successful]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:54]]></Time>
+<TimeTick>1732715994</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="12" status="Passed" >
+<Disp><![CDATA[Opening Pcori ApplicationSuccess]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T8">
+<Obj ><![CDATA[Step 1 - Verify Application Login]]></Obj>
+<Details ><![CDATA[Application is launched Successfully]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="13" status="Passed" >
+<Disp><![CDATA[Step 1 - Verify Application Login]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf13.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T9">
+<Obj ><![CDATA[Verify PCORI Online is now open for:]]></Obj>
+<Details ><![CDATA[PCORI Online is now open for: text is present on the right side of the screen]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="14" status="Passed" Source="Action1" SourceLine="39" >
+<Disp><![CDATA[Verify PCORI Online is now open for:]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf14.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T10">
+<Obj plainTxt="False" ><![CDATA[[ Image ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="15" Source="Action1" SourceLine="46" >
+<Disp><![CDATA[[ Image ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T11">
+<Obj ><![CDATA[Verify Logo and Text]]></Obj>
+<Details ><![CDATA[Logo and Text is present at the top of the page]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="16" status="Passed" Source="Action1" SourceLine="47" >
+<Disp><![CDATA[Verify Logo and Text]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T12">
+<Obj plainTxt="False" ><![CDATA[[ WebElement ].FireEvent]]></Obj>
+<Details plainTxt="False" ><![CDATA["OnClick"]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="Replay" icon="8" nRep="18" Source="Action1" SourceLine="55" >
+<Disp><![CDATA[[ WebElement ].FireEvent]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T13">
+<Obj plainTxt="False" ><![CDATA[[ WebElement ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="Replay" icon="8" nRep="19" Source="Action1" SourceLine="56" >
+<Disp><![CDATA[[ WebElement ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T14">
+<Obj ><![CDATA[Verify Login Help Text]]></Obj>
+<Details ><![CDATA[Your user name is your email address. is displayed while hover the mouse]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:57]]></Time>
+<TimeTick>1732715997</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="20" status="Passed" Source="Action1" SourceLine="63" >
+<Disp><![CDATA[Verify Login Help Text]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T15">
+<Obj ><![CDATA[Step 2 - Verify for User Name text box]]></Obj>
+<Details ><![CDATA[User Name text box was found]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:58]]></Time>
+<TimeTick>1732715998</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="21" status="Passed" >
+<Disp><![CDATA[Step 2 - Verify for User Name text box]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T16">
+<Obj ><![CDATA[Step 2.1 - Verify for Password text box]]></Obj>
+<Details ><![CDATA[Password text box was found]]></Details>
+<Time><![CDATA[11/27/2024 - 13:59:59]]></Time>
+<TimeTick>1732715999</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="22" status="Passed" >
+<Disp><![CDATA[Step 2.1 - Verify for Password text box]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T17">
+<Obj ><![CDATA[Step 2.2 - Verify for Click here text box]]></Obj>
+<Details ><![CDATA[Click here text box was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:01]]></Time>
+<TimeTick>1732716001</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="23" status="Passed" >
+<Disp><![CDATA[Step 2.2 - Verify for Click here text box]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T18">
+<Obj ><![CDATA[Step 2.3 - Verify for Privacy Policy text box]]></Obj>
+<Details ><![CDATA[Privacy Policy text box was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:02]]></Time>
+<TimeTick>1732716002</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="24" status="Passed" >
+<Disp><![CDATA[Step 2.3 - Verify for Privacy Policy text box]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T19">
+<Obj ><![CDATA[Step 2.4 - Verify for Click here to visit the PCORI website. text]]></Obj>
+<Details ><![CDATA[Click here to visit the PCORI website. text was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:03]]></Time>
+<TimeTick>1732716003</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="25" status="Passed" >
+<Disp><![CDATA[Step 2.4 - Verify for Click here to visit the PCORI website. text]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T20">
+<Obj ><![CDATA[Step 2.5 - Verify for Forgot your password? button]]></Obj>
+<Details ><![CDATA[Forgot your password? button was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:04]]></Time>
+<TimeTick>1732716004</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="26" status="Passed" >
+<Disp><![CDATA[Step 2.5 - Verify for Forgot your password? button]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T21">
+<Obj ><![CDATA[Step 2.6 - Verify for New User? button]]></Obj>
+<Details ><![CDATA[New User? button was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:05]]></Time>
+<TimeTick>1732716005</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="27" status="Passed" >
+<Disp><![CDATA[Step 2.6 - Verify for New User? button]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T22">
+<Obj ><![CDATA[Step 2.7 - Verify for Forgot your password? button]]></Obj>
+<Details ><![CDATA[Forgot your password? button was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:07]]></Time>
+<TimeTick>1732716007</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="28" status="Passed" >
+<Disp><![CDATA[Step 2.7 - Verify for Forgot your password? button]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T23">
+<Obj plainTxt="False" ><![CDATA[[ WebEdit ].Set]]></Obj>
+<Details plainTxt="False" ><![CDATA["pcori.reg+pismoketestdb@gmail.com.qapcdev"]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:07]]></Time>
+<TimeTick>1732716007</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="30" >
+<Disp><![CDATA[[ WebEdit ].Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T24">
+<Obj ><![CDATA[Step 2.8 - Enter pcori.reg+pismoketestdb@gmail.com.qapcdev in User Name field]]></Obj>
+<Details ><![CDATA[pcori.reg+pismoketestdb@gmail.com.qapcdev was entered in User Name field]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:08]]></Time>
+<TimeTick>1732716008</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="31" status="Passed" >
+<Disp><![CDATA[Step 2.8 - Enter pcori.reg+pismoketestdb@gmail.com.qapcdev in User Name field]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T25">
+<Obj plainTxt="False" ><![CDATA[[ WebEdit ].SetSecure]]></Obj>
+<Details plainTxt="False" ><![CDATA["67448d244dd26269bb7c304a8eb4af0d8dc5c090272db75e914b3b509f60"]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:08]]></Time>
+<TimeTick>1732716008</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="33" >
+<Disp><![CDATA[[ WebEdit ].SetSecure]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T26">
+<Obj ><![CDATA[Enter 67448d244dd26269bb7c304a8eb4af0d8dc5c090272db75e914b3b509f60 in Password field]]></Obj>
+<Details ><![CDATA[Password field was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:08]]></Time>
+<TimeTick>1732716008</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="34" status="Passed" >
+<Disp><![CDATA[Enter 67448d244dd26269bb7c304a8eb4af0d8dc5c090272db75e914b3b509f60 in Password field]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T27">
+<Obj ><![CDATA[Step 2.9 - Enter 67448d244dd26269bb7c304a8eb4af0d8dc5c090272db75e914b3b509f60 in Password field]]></Obj>
+<Details ><![CDATA[67448d244dd26269bb7c304a8eb4af0d8dc5c090272db75e914b3b509f60 is entered in Password field]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:09]]></Time>
+<TimeTick>1732716009</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="35" status="Passed" >
+<Disp><![CDATA[Step 2.9 - Enter 67448d244dd26269bb7c304a8eb4af0d8dc5c090272db75e914b3b509f60 in Password field]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T28">
+<Obj plainTxt="False" ><![CDATA[[ SFLButton ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:09]]></Time>
+<TimeTick>1732716009</TimeTick>
+<NodeArgs eType="Replay" icon="10" nRep="37" >
+<Disp><![CDATA[[ SFLButton ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T29">
+<Obj plainTxt="False" ><![CDATA[[ SFLButton ].Click()]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:09]]></Time>
+<TimeTick>1732716009</TimeTick>
+<NodeArgs eType="Replay" icon="10" nRep="40" >
+<Disp><![CDATA[[ SFLButton ].Click()]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T30">
+<Obj ><![CDATA[Step 2.10 - Click on Log In button]]></Obj>
+<Details ><![CDATA[Log In button is clicked]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:11]]></Time>
+<TimeTick>1732716011</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="41" status="Passed" >
+<Disp><![CDATA[Step 2.10 - Click on Log In button]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf15.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T31">
+<Obj ><![CDATA[Step 2.11 - Verify for Application is logged in successfully button]]></Obj>
+<Details ><![CDATA[Application is logged in successfully button was found]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:12]]></Time>
+<TimeTick>1732716012</TimeTick>
+<NodeArgs eType="User" icon="6" nRep="42" status="Passed" >
+<Disp><![CDATA[Step 2.11 - Verify for Application is logged in successfully button]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf16.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T32">
+<Obj plainTxt="False" ><![CDATA[Stop Run]]></Obj>
+<Details plainTxt="False" ><![CDATA[Run stopped by user.]]></Details>
+<Time><![CDATA[11/27/2024 - 14:00:37]]></Time>
+<TimeTick>1732716037</TimeTick>
+<NodeArgs eType="General" icon="11" nRep="43" status="Information" >
+<Disp><![CDATA[Stop Run]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="11/27/2024 - 13:59:46" eTime="11/27/2024 - 14:00:37" passed="19" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartAction" icon="4" nRep="7" status="Passed" >
+<Disp><![CDATA[Action1 Summary]]></Disp>
+</NodeArgs>
+</Action>
+<NodeArgs eType="StartIteration" icon="3" nRep="6" status="Passed" >
+<Disp><![CDATA[LOI_Submission_RA_LOI_And_Application_001_02 Iteration 1 (Row 1)]]></Disp>
+</NodeArgs>
+</DIter>
+<Summary sTime="11/27/2024 - 13:59:44" eTime="11/27/2024 - 14:00:37" passed="19" failed="0" warnings="0" stopped="True" ></Summary>
+<NodeArgs eType="StartTest" icon="1" nRep="3" status="Passed" >
+<Disp><![CDATA[Test LOI_Submission_RA_LOI_And_Application_001_02 Summary]]></Disp>
+</NodeArgs>
+</Doc>
+</Report>
