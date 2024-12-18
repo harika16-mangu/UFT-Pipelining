@@ -22,11 +22,11 @@ steps:
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)'
       Contents: '**/*'
-      TargetFolder:"C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts"  # Copy scripts to UFT test folder
+      TargetFolder: "C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts"  # Copy scripts to UFT test folder
 
   - script: |
       echo "Running UFT Tests..."
-      "C:/Program Files (x86)/Micro Focus/Unified Functional Testing/bin/uftcmd.exe" -run -test ""C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts" -report "C:/SFAutomationCopy/Results"
+      "C:/Program Files (x86)/OpenText/UFT One/bin/UFT.exe" -run -test "C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts" -report "C:/SFAutomationCopy/Results"
     displayName: 'Execute UFT Tests'
 
   - task: PublishTestResults@2
