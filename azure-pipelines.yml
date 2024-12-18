@@ -1,0 +1,37 @@
+trigger:
+  branches:
+    include:
+      - main  # Trigger pipeline on changes to the main branch
+
+pool:
+  vmImage: 'windows-latest'  # Use a Windows agent to run UFT tests
+
+variables:
+  UFT_TEST_FOLDER: "C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts"  # Path where tests are stored
+  UFT_REPORT_FOLDER: "C:/SFAutomationCopy/Results"  # Path to save test reports
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+
+  - checkout: self  # Pull the repository files
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: '**/*'
+      TargetFolder:"C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts"  # Copy scripts to UFT test folder
+
+  - script: |
+      echo "Running UFT Tests..."
+      "C:/Program Files (x86)/Micro Focus/Unified Functional Testing/bin/uftcmd.exe" -run -test ""C:/SFAutomationCopy/Scripts/LOI_Submission_RA_LOI_And_Application_001_02/Action1/Script.mts" -report "C:/SFAutomationCopy/Results"
+    displayName: 'Execute UFT Tests'
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: "C:/SFAutomationCopy/Results/*.xml"
+      failTaskOnFailedTests: true
+
